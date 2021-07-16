@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-sample-plugin",
+  "name": "yaml-my-hashtags",
   "version": "0.12.0",
-  "description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+  "description": "Converts your #tag-name type tags to YAML frontmatter tags.",
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
@@ -18,6 +18,7 @@
     "obsidian": "^0.12.0",
     "rollup": "^2.32.1",
     "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "gray-matter": "^4.0.3"
   }
 }
