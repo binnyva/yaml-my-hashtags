@@ -9,6 +9,8 @@ This is an [Obsidian](https://obsidian.md) plugin to converts all the Hashtags(t
 3. Press `Ctrl+P` to open Command Palette
 4. Select/type 'Yaml my Hashtags: Convert Hashtags to YAML Frontmatter' option from the list.
 
+Another option is just select the text which has the `#hashtags` and run the action. This will replace the hashtags within the selection itself - rather than editing the entire file.
+
 #### Before...
 
 ```markdown

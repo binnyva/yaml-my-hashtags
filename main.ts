@@ -44,11 +44,6 @@ export default class YamlMyHashtags extends Plugin {
 		const metadata = this.app.metadataCache.getFileCache(noteFile);
 		const editor =  this.app.workspace.getActiveViewOfType(MarkdownView)?.editor;
 		const selectedText = editor.getSelection();
-		const selectedCursor = editor.getCursor();
-
-		console.log(selectedText, selectedCursor)
-
-		return;
 
 		// Get contents of note...
 		// let leaf = this.app.workspace.activeLeaf;
@@ -58,30 +53,9 @@ export default class YamlMyHashtags extends Plugin {
 
 		let hashTagRegexp = /#([^\s#,]+)/g; // Regexp that will match hashtags
 
-		let selectedFrom = selectedCursor.from;
-		let selectedTo = selectedCursor.to;
-		// Selections from to don't have to be in order. So swap if that's the case
-		if(selectedCursor.from.line > selectedCursor.to.line || selectedCursor.from.ch > selectedCursor.to.ch) {
-			selectedFrom = selectedCursor.to;
-			selectedTo = selectedCursor.from;
-		}
-
 		// Text is selected
-		if(selectedFrom.ch !== selectedTo.ch || selectedFrom.line !== selectedTo.line) {
-			const lines = text.split("\n");
-			let selectedText = "";
-
-			if(selectedFrom.line === selectedTo.line) { // Single line selection.
-				selectedText = lines[selectedFrom.line].substring(selectedFrom.ch, selectedTo.ch)
-			} else {
-				selectedText = lines[selectedFrom.line].substring(selectedFrom.ch) + "\n"; // First line of the selection.
-				for(let i=selectedFrom.line+1; i<selectedTo.line; i++) {
-					selectedText += lines[i] + "\n";
-				}
-				selectedText += lines[selectedTo.line].substring(0, selectedTo.ch); // List line
-			}
-
-			const tagMatches = [...text.matchAll(hashTagRegexp)]
+		if(selectedText) {
+			const tagMatches = [...selectedText.matchAll(hashTagRegexp)]
 			let tags = tagMatches.map( ele => ele[1] )
 
 			if(!tags.length) return false; // No tags found
@@ -89,7 +63,7 @@ export default class YamlMyHashtags extends Plugin {
 
 			let newText = selectedText
 
-			if(this.settings.removeHashTags) {
+			if(this.settings.removeHashTags) { // Remove current hashtags if option set so.
 				for(let i in tags) {
 					newText = newText.replace(`#${tags[i]}`, "")
 				}
@@ -98,8 +72,7 @@ export default class YamlMyHashtags extends Plugin {
 			const tagsList = JSON.stringify(tags).replace(/[\[\]]/g, ""); // We don't need the [] part of the array
 			newText = newText.substring(0, tagMatches[0].index) + tagsList + newText.substring(tagMatches[0].index)
 
-			console.log(newText)
-
+			editor.replaceSelection(newText);
 
 		} else {
 			const tagMatches = [...text.matchAll(hashTagRegexp)]
