@@ -3,7 +3,7 @@
 	"name": "Yaml My Hashtags",
 	"version": "0.0.1",
 	"minAppVersion": "0.9.12",
-	"description": "Converts your #tag-name type tags to YAML frontmatter tags.",
+	"description": "Obsidian Plugin to converts your #tag-name type tags to YAML frontmatter tags.",
 	"author": "Binny V A",
 	"authorUrl": "https://binnyva.com/",
 	"isDesktopOnly": false

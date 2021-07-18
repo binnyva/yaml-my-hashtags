@@ -1,6 +1,6 @@
-## Yaml my Hashtags
+# Yaml my Hashtags
 
-Converts all the Hashtags(tags in the `#tag-name` format) in your note to a more standard YAML frontmatter format. 
+This is an [Obsidian](https://obsidian.md) plugin to converts all the Hashtags(tags in the `#tag-name` format) in your note to a more standard YAML frontmatter format. 
 
 ## Usage
 
